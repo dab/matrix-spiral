@@ -26,7 +26,20 @@ def spiralP(width)
     end
     x, y = x + dx, y + dy
   end
-  return canvas
+  canvas.each do |s|
+    s.compact!
+  end
+  # rearrange array
+  rows = n = width - 1
+  i = j = 0
+  while(n >= 0) do
+    (0..rows).each do |i|
+      output[j][i] = canvas[i][n]
+    end
+    n -= 1
+    j += 1
+  end
+  return output
 end
 
 user_number = ARGV[0].to_i
@@ -37,24 +50,11 @@ output = Array.new(number_sqr) { Array.new(number_sqr) }
 
 if (number_sqr**2) == user_number
   spiral = spiralP(number_sqr)
-  spiral.each do |s|
-    s.compact!
-  end
-  # rearrange array
-  width = n = number_sqr.to_i - 1
-  i = j = 0
-  while(n >= 0) do
-    (0..width).each do |i|
-      output[j][i] = spiral[i][n]
-    end
-    n -= 1
-    j += 1
-  end
 
   print "Input:\t\t#{user_number}\n"
 
   print "Output:"
-  output.each do |row|
+  spiral.each do |row|
     print "\t"
     row.each do |col|
       print "\t#{col}"
