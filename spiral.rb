@@ -43,16 +43,12 @@ def spiralP(width)
 end
 
 user_number = ARGV[0].to_i
-
 number_sqr = Math.sqrt(user_number)
-spiral = []
-output = Array.new(number_sqr) { Array.new(number_sqr) }
 
 if (number_sqr**2) == user_number
   spiral = spiralP(number_sqr)
 
   print "Input:\t\t#{user_number}\n"
-
   print "Output:"
   spiral.each do |row|
     print "\t"
