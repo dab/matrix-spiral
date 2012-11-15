@@ -2,7 +2,7 @@ def spiralP(width)
 
   # preparing emtpy 2D canvas for our spiral
   rows = cols = width  
-  canvas = output = Array.new(rows) { Array.new(cols) }
+  canvas = Array.new(rows) { Array.new(cols) }
   
   x = y = dx = n = 0
   dy = -1
@@ -29,25 +29,28 @@ def spiralP(width)
   canvas.each do |s|
     s.compact!
   end
+
   # rearrange array
-  rows = n = width - 1
+  side_width = n = width - 1
+  output = Array.new(width) { Array.new(width) }
   i = j = 0
   while(n >= 0) do
-    (0..rows).each do |i|
+    (0..side_width).each do |i|
       output[j][i] = canvas[i][n]
     end
     n -= 1
     j += 1
   end
+
   return output
 end
 
 user_number = ARGV[0].to_i
-number_sqr = Math.sqrt(user_number)
+number_sqr = Math.sqrt(user_number.abs)
+if (number_sqr.to_i == number_sqr) && (user_number > 0)
 
-if (number_sqr**2) == user_number
   spiral = spiralP(number_sqr)
-
+  # Hooray, printing our spiral matrix
   print "Input:\t\t#{user_number}\n"
   print "Output:"
   spiral.each do |row|
