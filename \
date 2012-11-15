@@ -1,0 +1,43 @@
+def spiralP(width)
+
+  # preparing emtpy 2D canvas for our spiral
+  rows = cols = width  
+  canvas = Array.new(rows) { Array.new(cols) }
+  
+  x = y = dx = 0
+  dy = -1
+  n = 1
+  half_w = width / 2
+
+  print "Square size is #{width}\n"
+
+  if width % 2 == 0
+    cx = half_w - 1
+    cy = half_w
+  elsif width % 2 == 1
+    cx = half_w
+    cy = half_w
+  end
+
+  for i in 0..width**2 do
+
+    if ( -half_w < x ) and ( x <= half_w ) and ( -half_w < y ) and ( y <= half_w )
+      canvas[cx + x][cy + y] = i + 1
+    end
+    if x == y or (x < 0 and x == -y) or (x > 0 and x == 1-y)
+      dx, dy = -dy, dx
+    end
+    x, y = x + dx, y + dy
+  end
+  
+  i = width
+  j = 0
+  while(i > 0) do
+    (0..width-1).each do |j|
+      print "#{canvas[j][i]}\n"
+    end
+  end
+
+end
+
+spiralP(4) 
